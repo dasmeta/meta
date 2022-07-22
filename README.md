@@ -6,22 +6,13 @@ We run our hooks on every commit to automatically point out issues in code such 
 
 Run :
   ```bash
-  curl -fsSL -O https://github.com/dasmeta/pre-commit-terraform/releases/download/v2.1.1/add-this-linux.sh 
-  chmod +x add-this-linux.sh
+  curl -fsSL -O https://github.com/dasmeta/meta/releases/download/v0.1.0/add-this-linux.sh 
   ./add-this-linux.sh
   ```
 
 and it will do all automanically like` create needed folders and files and do needed commands (install,run,etc.)
 
-## NOTE in the end of the script it will output an folder path copy it like /root/go/bin/meta
-
-and run this NOTE in the end of path you must add /meta:
-  ```bash
-  alias meta="/root/go/bin/meta/meta"
-  ```
-Then run meta command where you want and it will create needed files and folders.
-
-## Config for GitHooks
+## NOTE Config for GitHooks
 
 git config core.hooksPath githooks
 
@@ -29,17 +20,10 @@ git config core.hooksPath githooks
 
 Run :
   ```bash
-  curl -fsSL -O https://github.com/dasmeta/pre-commit-terraform/releases/download/v2.1.1/add-this-mac.sh 
-  chmod +x add-this-mac.sh
+  curl -fsSL -O https://github.com/dasmeta/meta/releases/download/v0.1.0/add-this-mac.sh 
   ./add-this-mac.sh
   ```
 
-## NOTE in the end of the script it will output an folder path copy it like /root/go/bin/meta
-
-and run this NOTE in the end of path you must add /meta:
-  ```bash
-  alias meta="/root/go/bin/meta/meta"
-  ```
 ## If you want to do it all manually for use pre-commit githooks you need to have installed pre-commit see here how to install.
 
 <!-- markdownlint-disable no-inline-html -->
