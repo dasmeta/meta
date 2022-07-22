@@ -23,7 +23,7 @@ func createConfigFile() {
 
 	defer f.Close()
 
-	words := []string{"repos:", "- repo: https://github.com/pre-commit/pre-commit-hooks", "  rev: v4.2.0", "  hooks:", "    - id: check-added-large-files", "    - id: check-merge-conflict", "    - id: check-vcs-permalinks", "    - id: end-of-file-fixer", "    - id: trailing-whitespace", "      args: [--markdown-linebreak-ext=md]", "      exclude: CHANGELOG.md", "    - id: check-yaml", "    - id: check-merge-conflict", "    - id: check-executables-have-shebangs", "    - id: check-case-conflict", "    - id: mixed-line-ending", "      args: [--fix=lf]", "    - id: detect-aws-credentials", "      args: ['--allow-missing-credentials']", "    - id: detect-private-key", "- repo: https://github.com/antonbabenko/pre-commit-terraform", "	rev: v1.62.3", "  hooks:", "    - id: terraform_fmt", "    - id: terraform_docs", "      args:", "	    - '--args=--lockfile=false'"}
+	words := []string{"repos:", "- repo: https://github.com/pre-commit/pre-commit-hooks", "  rev: v4.2.0", "  hooks:", "    - id: check-added-large-files", "    - id: check-merge-conflict", "    - id: check-vcs-permalinks", "    - id: end-of-file-fixer", "    - id: trailing-whitespace", "      args: [--markdown-linebreak-ext=md]", "      exclude: CHANGELOG.md", "    - id: check-yaml", "    - id: check-merge-conflict", "    - id: check-executables-have-shebangs", "    - id: check-case-conflict", "    - id: mixed-line-ending", "      args: [--fix=lf]", "    - id: detect-aws-credentials", "      args: ['--allow-missing-credentials']", "    - id: detect-private-key", "- repo: https://github.com/antonbabenko/pre-commit-terraform", "  rev: v1.62.3", "  hooks:", "    - id: terraform_fmt", "    - id: terraform_docs", "  args:", "      - '--args=--lockfile=false'"}
 
 	for _, word := range words {
 
@@ -46,7 +46,7 @@ func createFIle() {
 
 	defer f.Close()
 
-	words := []string{"#!/bin/bash", "echo 'Start git pre-commit hooks and checks... ';", "sudo pre-commit run -a;", "echo 'End git pre-commit hooks and checks... ';"}
+	words := []string{"#!/bin/bash", "echo 'Start git pre-commit hooks and checks... ';", "pre-commit run -a;", "echo 'End git pre-commit hooks and checks... ';"}
 
 	for _, word := range words {
 
