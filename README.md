@@ -6,7 +6,7 @@ We run our hooks on every commit to automatically point out issues in code such 
 
 Run :
   ```bash
-    /bin/bash -c "$(wget https://github.com/dasmeta/meta/releases/download/v0.1.0/add-this-linux.sh)"
+    bash <(wget -qO- https://github.com/dasmeta/meta/releases/download/v0.1.0/add-this-linux.sh)
   ```
 
 and it will do all automanically like` create needed folders and files and do needed commands (install,run,etc.)
@@ -19,7 +19,7 @@ git config core.hooksPath githooks
 
 Run :
   ```bash
-    /bin/bash -c "$(wget https://github.com/dasmeta/meta/releases/download/v0.1.0/add-this-mac.sh)"
+    bash <(wget -qO- https://github.com/dasmeta/meta/releases/download/v0.1.0/add-this-mac.sh)
   ```
 
 ## Developing
