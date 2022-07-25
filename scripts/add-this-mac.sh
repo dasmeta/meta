@@ -1,7 +1,5 @@
 #!/bin/bash
 
-brew install wget
-
 while true; do
     read -p "First we have to install Meta, is that okay? Y or N? If you choose N this script will exit." yn
     case $yn in
@@ -12,6 +10,7 @@ while true; do
 done
 
 mv meta-mac meta
-sudo cp meta /usr/bin
+cp meta /usr/bin
+chmod +x /usr/bin/meta
 echo All done!
 exit
