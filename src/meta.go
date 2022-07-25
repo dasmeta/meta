@@ -132,7 +132,7 @@ func configPreCommitGlobally() {
 	arg2 := "core.hooksPath"
 	arg3 := "githooks"
 
-	cmd := exec.Command(app, arg0, arg1, arg2, arg3)
+	cmd := exec.Command(app, arg0, arg2, arg3)
 	fmt.Println(cmd)
 }
 
