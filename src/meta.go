@@ -128,7 +128,7 @@ func configPreCommitGlobally() {
 	app := "git"
 
 	arg0 := "config"
-	arg1 := "--get"
+	// arg1 := "--get"
 	arg2 := "core.hooksPath"
 	arg3 := "githooks"
 
