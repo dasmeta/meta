@@ -61,20 +61,17 @@ func createFIle() {
 		}
 	}
 
-	fmt.Println("done")
+	fmt.Println(".pre-commit file creation is done")
 }
 
 func createFolder() {
 	if err := os.Mkdir("githooks", os.ModePerm); err != nil {
 		log.Fatal(err)
 	}
-	file := os.Chdir("githooks")
-	fmt.Println(file)
+	os.Chdir("githooks")
 	createFIle()
-	cmd := os.Chmod("pre-commit", 0777)
-	fmt.Println(cmd)
-	file1 := os.Chdir("../")
-	fmt.Println(file1)
+	os.Chmod("pre-commit", 0777)
+	os.Chdir("../")
 }
 
 func installPreCommit() {
@@ -148,8 +145,6 @@ func createPackageJsonFile() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println("file created")
 	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/package.json")
 
 	if err != nil {
@@ -159,7 +154,7 @@ func createPackageJsonFile() {
 	defer content.Body.Close()
 
 	io.Copy(file, content.Body)
-	fmt.Println("done")
+	fmt.Println("package.json file creation is done")
 }
 
 func createCommitLintConfigFile() {
@@ -172,7 +167,6 @@ func createCommitLintConfigFile() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("file created")
 	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commitlint.config.js")
 
 	if err != nil {
@@ -182,27 +176,28 @@ func createCommitLintConfigFile() {
 	defer content.Body.Close()
 
 	io.Copy(file, content.Body)
-	fmt.Println("done")
+	fmt.Println("commitlint.config.js file creation is done")
 }
 
 func createGithubFolder() {
 	if err := os.Mkdir(".github", os.ModePerm); err != nil {
 		log.Fatal(err)
 	}
-	file := os.Chdir(".github")
-	fmt.Println(file)
+
+	os.Chdir(".github")
+	fmt.Println("create .github folder")
 	createWorkflowFolder()
 	createCommitLintYamlFile()
-	change := os.Chdir("../../")
-	fmt.Println(change)
+	os.Chdir("../../")
+
 }
 
 func createWorkflowFolder() {
 	if err := os.Mkdir("workflows", os.ModePerm); err != nil {
 		log.Fatal(err)
 	}
-	file := os.Chdir("workflows")
-	fmt.Print(file)
+	os.Chdir("workflows")
+	fmt.Println("create workflows folder")
 }
 
 func createCommitLintYamlFile() {
@@ -214,7 +209,6 @@ func createCommitLintYamlFile() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("file created")
 	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commitlint.yaml")
 
 	if err != nil {
@@ -224,7 +218,7 @@ func createCommitLintYamlFile() {
 	defer content.Body.Close()
 
 	io.Copy(file, content.Body)
-	fmt.Println("done")
+	fmt.Println("commitlint.yaml file creation is done")
 
 }
 
@@ -232,20 +226,18 @@ func createHuskyFolder() {
 	if err := os.Mkdir(".husky", os.ModePerm); err != nil {
 		log.Fatal(err)
 	}
-	file := os.Chdir(".husky")
-	fmt.Println(file)
-
+	os.Chdir(".husky")
+	fmt.Println("create .husky folder")
 	createCommitMSGFile()
 	create_Folder()
-	file1 := os.Chdir("_")
-	fmt.Println(file1)
-
+	os.Chdir("_")
 }
 
 func create_Folder() {
 	if err := os.Mkdir("_", os.ModePerm); err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("create _ folder")
 	createHuskyshFile()
 	createGitIgnoreFile()
 }
@@ -259,7 +251,6 @@ func createHuskyshFile() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("file created")
 	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/husky.sh")
 
 	if err != nil {
@@ -269,7 +260,7 @@ func createHuskyshFile() {
 	defer content.Body.Close()
 
 	io.Copy(file, content.Body)
-	fmt.Println("done")
+	fmt.Println("husky.sh file creation is done")
 
 }
 
@@ -282,7 +273,6 @@ func createCommitMSGFile() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("file created")
 	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commit-msg")
 
 	if err != nil {
@@ -292,7 +282,7 @@ func createCommitMSGFile() {
 	defer content.Body.Close()
 
 	io.Copy(file, content.Body)
-	fmt.Println("done")
+	fmt.Println("commit-msg file creation is done")
 
 }
 
@@ -305,7 +295,6 @@ func createGitIgnoreFile() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("file created")
 	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/default.gitignore")
 
 	if err != nil {
@@ -315,7 +304,7 @@ func createGitIgnoreFile() {
 	defer content.Body.Close()
 
 	io.Copy(file, content.Body)
-	fmt.Println("done")
+	fmt.Println(".gitignore file creation is done")
 
 }
 
