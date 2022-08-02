@@ -45,8 +45,11 @@ Flags:
 ```
 
 ## Example
+
+```bash
 meta pre-commit
 meta semantic-release
+```
 
 ## Developing
 
