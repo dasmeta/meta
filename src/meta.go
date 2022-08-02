@@ -2,10 +2,14 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/thatisuday/commando"
 )
 
 func check(e error) {
@@ -136,9 +140,215 @@ func configPreCommitGlobally() {
 	fmt.Println(cmd)
 }
 
+func createPackageJsonFile() {
+	file, err := os.Create("package.json")
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("file created")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/package.json")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer content.Body.Close()
+
+	io.Copy(file, content.Body)
+	fmt.Println("done")
+}
+
+func createCommitLintConfigFile() {
+
+	file, err := os.Create("commitlint.config.js")
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("file created")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commitlint.config.js")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer content.Body.Close()
+
+	io.Copy(file, content.Body)
+	fmt.Println("done")
+}
+
+func createGithubFolder() {
+	if err := os.Mkdir(".github", os.ModePerm); err != nil {
+		log.Fatal(err)
+	}
+	file := os.Chdir(".github")
+	fmt.Println(file)
+	createWorkflowFolder()
+	createCommitLintYamlFile()
+	change := os.Chdir("../../")
+	fmt.Println(change)
+}
+
+func createWorkflowFolder() {
+	if err := os.Mkdir("workflows", os.ModePerm); err != nil {
+		log.Fatal(err)
+	}
+	file := os.Chdir("workflows")
+	fmt.Print(file)
+}
+
+func createCommitLintYamlFile() {
+	file, err := os.Create("commitlint.yaml")
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("file created")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commitlint.yaml")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer content.Body.Close()
+
+	io.Copy(file, content.Body)
+	fmt.Println("done")
+
+}
+
+func createHuskyFolder() {
+	if err := os.Mkdir(".husky", os.ModePerm); err != nil {
+		log.Fatal(err)
+	}
+	file := os.Chdir(".husky")
+	fmt.Println(file)
+
+	createCommitMSGFile()
+	create_Folder()
+	file1 := os.Chdir("_")
+	fmt.Println(file1)
+
+}
+
+func create_Folder() {
+	if err := os.Mkdir("_", os.ModePerm); err != nil {
+		log.Fatal(err)
+	}
+	createHuskyshFile()
+	createGitIgnoreFile()
+}
+
+func createHuskyshFile() {
+	file, err := os.Create("husky.sh")
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("file created")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/husky.sh")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer content.Body.Close()
+
+	io.Copy(file, content.Body)
+	fmt.Println("done")
+
+}
+
+func createCommitMSGFile() {
+	file, err := os.Create("commit-msg")
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("file created")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commit-msg")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer content.Body.Close()
+
+	io.Copy(file, content.Body)
+	fmt.Println("done")
+
+}
+
+func createGitIgnoreFile() {
+	file, err := os.Create(".gitignore")
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("file created")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/default.gitignore")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer content.Body.Close()
+
+	io.Copy(file, content.Body)
+	fmt.Println("done")
+
+}
+
 func main() {
-	createConfigFile()
-	createFolder()
-	configPreCommitGlobally()
-	installPreCommit()
+
+	commando.
+		SetExecutableName("meta").
+		SetVersion("v1.0.0").
+		SetDescription("Meta is a command-line tool to generate semantic-release and pre-commit hooks in your projects.\nIt helps you create needed files and run it and much more.").
+		SetEventListener(func(eventName string) {
+			//fmt.Println("event-name: ", eventName)
+		})
+
+	commando.
+		Register("pre-commit").
+		SetDescription("This command creates files and scripts for needed pre-commit and outputs that files in the project directory.").
+		SetShortDescription("creates a pre-commit hook").
+		SetAction(func(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+			createConfigFile()
+			createFolder()
+			configPreCommitGlobally()
+			installPreCommit()
+		})
+	commando.
+		Register("semantic-release").
+		SetDescription("This command creates files and github actions CI and outputs that files in the project directory.").
+		SetShortDescription("Automatically do versioning and generate changelogs").
+		SetAction(func(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
+			createPackageJsonFile()
+			createCommitLintConfigFile()
+			createGithubFolder()
+			createHuskyFolder()
+		})
+
+	commando.Parse(nil)
 }
