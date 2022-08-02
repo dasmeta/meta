@@ -10,7 +10,7 @@ while true; do
 done
 
 mv meta-linux meta
-cp meta /usr/bin
+cp -r meta /usr/bin
 chmod +x /usr/bin/meta
 echo All done!
 exit

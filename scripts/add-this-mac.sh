@@ -10,7 +10,7 @@ while true; do
 done
 
 mv meta-mac meta
-cp meta /usr/bin
-chmod +x /usr/bin/meta
+cp -r meta /usr/local/bin/
+chmod +x /usr/local/bin/meta
 echo All done!
 exit

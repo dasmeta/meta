@@ -22,6 +22,32 @@ Run :
     bash <(wget -qO- https://github.com/dasmeta/meta/releases/download/v0.1.0/add-this-mac.sh)
   ```
 
+## USAGE
+
+```bash
+Meta is a command-line tool to generate semantic-release and pre-commit hooks in your projects.
+
+It helps you create needed files and run it and much more.
+
+Usage:
+   meta {flags}
+   meta <command> {flags}
+
+Commands: 
+   help                          displays usage information
+   pre-commit                    creates a pre-commit hook
+   semantic-release              Automatically do versioning and generate changelogs
+   version                       displays version number
+
+Flags: 
+   -h, --help                    displays usage information of the application or a command (default: false)
+   -v, --version                 displays version number (default: false)
+```
+
+## Example
+meta pre-commit
+meta semantic-release
+
 ## Developing
 
 This repository contains scripts that run in linux or mac for installing pre-commit hooks. The files read from release. You must attach binaries if you add something new.
