@@ -10,11 +10,8 @@ while true; do
     esac
 done
 
-<<<<<<< HEAD
 sudo mv meta-linux meta
 sudo cp meta /usr/local/bin/
 sudo chmod +x /usr/local/bin/meta
-=======
->>>>>>> origin
 echo All done!
 exit
