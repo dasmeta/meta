@@ -9,8 +9,8 @@ while true; do
     esac
 done
 
-mv meta-mac meta
-cp -r meta /usr/local/bin/
-chmod +x /usr/local/bin/meta
+sudo mv meta-mac meta
+sudo cp meta /usr/local/bin/
+sudo chmod +x /usr/local/bin/meta
 echo All done!
 exit
