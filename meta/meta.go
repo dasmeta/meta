@@ -12,6 +12,9 @@ import (
 	"github.com/thatisuday/commando"
 )
 
+
+var version = "v0.1.1";
+
 func check(e error) {
 	if e != nil {
 		panic(e)
@@ -145,7 +148,7 @@ func createPackageJsonFile() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/package.json")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/" + version + "/package.json")
 
 	if err != nil {
 		log.Fatal(err)
@@ -167,7 +170,7 @@ func createCommitLintConfigFile() {
 		log.Fatal(err)
 	}
 
-	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commitlint.config.js")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/" + version +  "/commitlint.config.js")
 
 	if err != nil {
 		log.Fatal(err)
@@ -209,7 +212,7 @@ func createCommitLintYamlFile() {
 		log.Fatal(err)
 	}
 
-	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commitlint.yaml")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/" + version + "/commitlint.yaml")
 
 	if err != nil {
 		log.Fatal(err)
@@ -251,7 +254,7 @@ func createHuskyshFile() {
 		log.Fatal(err)
 	}
 
-	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/husky.sh")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/" + version +  "/husky.sh")
 
 	if err != nil {
 		log.Fatal(err)
@@ -273,7 +276,7 @@ func createCommitMSGFile() {
 		log.Fatal(err)
 	}
 
-	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/commit-msg")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/" + version +  "/commit-msg")
 
 	if err != nil {
 		log.Fatal(err)
@@ -295,7 +298,7 @@ func createGitIgnoreFile() {
 		log.Fatal(err)
 	}
 
-	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/v0.1.1/default.gitignore")
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/" + version +  "/default.gitignore")
 
 	if err != nil {
 		log.Fatal(err)
