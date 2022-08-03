@@ -315,7 +315,7 @@ func main() {
 
 	commando.
 		SetExecutableName("meta").
-		SetVersion("v1.0.0").
+		SetVersion(version).
 		SetDescription("Meta is a command-line tool to generate semantic-release and pre-commit hooks in your projects.\nIt helps you create needed files and run it and much more.").
 		SetEventListener(func(eventName string) {
 			//fmt.Println("event-name: ", eventName)
