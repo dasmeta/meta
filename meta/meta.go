@@ -30,7 +30,7 @@ func createConfigFile() {
 
 	defer f.Close()
 
-	words := []string{"repos:", "- repo: https://github.com/pre-commit/pre-commit-hooks", "  rev: v4.2.0", "  hooks:", "    - id: check-added-large-files", "    - id: check-merge-conflict", "    - id: check-vcs-permalinks", "    - id: end-of-file-fixer", "    - id: trailing-whitespace", "      args: [--markdown-linebreak-ext=md]", "      exclude: CHANGELOG.md", "    - id: check-yaml", "    - id: check-merge-conflict", "    - id: check-executables-have-shebangs", "    - id: check-case-conflict", "    - id: mixed-line-ending", "      args: [--fix=lf]", "    - id: detect-aws-credentials", "      args: ['--allow-missing-credentials']", "    - id: detect-private-key", "- repo: https://github.com/antonbabenko/pre-commit-terraform", "  rev: v1.62.3", "  hooks:", "    - id: terraform_fmt", "    - id: terraform_docs", "  args:", "      - '--args=--lockfile=false'"}
+	words := []string{"repos:", "- repo: https://github.com/pre-commit/pre-commit-hooks", "  rev: v4.3.0", "  hooks:", "    - id: check-added-large-files", "    - id: check-merge-conflict", "    - id: check-vcs-permalinks", "    - id: end-of-file-fixer", "    - id: trailing-whitespace", "      args: [--markdown-linebreak-ext=md]", "      exclude: CHANGELOG.md", "    - id: check-yaml", "    - id: check-merge-conflict", "    - id: check-executables-have-shebangs", "    - id: check-case-conflict", "    - id: mixed-line-ending", "      args: [--fix=lf]", "    - id: detect-aws-credentials", "      args: ['--allow-missing-credentials']", "    - id: detect-private-key", "- repo: https://github.com/antonbabenko/pre-commit-terraform", "  rev: v1.74.1", "  hooks:", "    - id: terraform_fmt", "    - id: terraform_docs", "      args:", "        - --hook-config=--path-to-file=README.md", "        - --hook-config=--add-to-existing-file=true", "        - --hook-config=--create-file-if-not-exist=true"}
 
 	for _, word := range words {
 
@@ -53,7 +53,7 @@ func createFIle() {
 
 	defer f.Close()
 
-	words := []string{"#!/bin/bash", "echo 'Start git pre-commit hooks and checks... ';", "pre-commit run -a;", "echo 'End git pre-commit hooks and checks... ';"}
+	words := []string{"#!/bin/bash", "set -e", "for file in $(git status --short | grep '^[MARCD]')","do", "  git show ':$file'", "  pre-commit run --show-diff-on-failure --color=always --all-files",  "  if [ $? -ne 0 ]; then", "    exit 1", "  fi", "done"}
 
 	for _, word := range words {
 
@@ -191,6 +191,7 @@ func createGithubFolder() {
 	fmt.Println("create .github folder")
 	createWorkflowFolder()
 	createCommitLintYamlFile()
+	createGitHubCI()
 	os.Chdir("../../")
 
 }
@@ -222,6 +223,29 @@ func createCommitLintYamlFile() {
 
 	io.Copy(file, content.Body)
 	fmt.Println("commitlint.yaml file creation is done")
+
+}
+
+func createGitHubCI() {
+	os.Chdir("workflows")
+	file, err := os.Create("pre-commit.yaml")
+
+	defer file.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	content, err := http.Get("https://github.com/dasmeta/meta/releases/download/" + version + "/pre-commit.yml")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer content.Body.Close()
+
+	io.Copy(file, content.Body)
+	fmt.Println("pre-commit.yaml file creation is done")
 
 }
 
@@ -323,22 +347,24 @@ func main() {
 
 	commando.
 		Register("pre-commit").
-		SetDescription("This command creates files and scripts for needed pre-commit and outputs that files in the project directory.").
-		SetShortDescription("creates a pre-commit hook").
+		SetDescription("This command creates .pre-commit.yaml files and after running scripts for needed pre-commit checks and outputs that files in the project directory.").
+		SetShortDescription("This command creates .pre-commit.yaml files and after running scripts for needed pre-commit checks and outputs that files in the project directory.").
 		SetAction(func(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 			createConfigFile()
 			createFolder()
 			configPreCommitGlobally()
 			installPreCommit()
 		})
+
 	commando.
 		Register("semantic-release").
-		SetDescription("This command creates files and github actions CI and outputs that files in the project directory.").
-		SetShortDescription("Automatically do versioning and generate changelogs").
+		SetDescription("This command creates files and github actions CI for semantic release also for pre-commit checks and outputs that files in the project directory.").
+		SetShortDescription("This command creates files and github actions CI for semantic release also for pre-commit checks and outputs that files in the project directory.").
 		SetAction(func(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
 			createPackageJsonFile()
 			createCommitLintConfigFile()
 			createGithubFolder()
+			createGitHubCI()
 			createHuskyFolder()
 		})
 

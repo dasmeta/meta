@@ -26,20 +26,19 @@ Run :
 
 ```bash
 Meta is a command-line tool to generate semantic-release and pre-commit hooks in your projects.
-
 It helps you create needed files and run it and much more.
 
 Usage:
    meta {flags}
    meta <command> {flags}
 
-Commands: 
+Commands:
    help                          displays usage information
-   pre-commit                    creates a pre-commit hook
+   pre-commit                    This command creates .pre-commit.yaml files and after running scripts for needed pre-commit checks and outputs that files in the project directory.
    semantic-release              Automatically do versioning and generate changelogs
    version                       displays version number
 
-Flags: 
+Flags:
    -h, --help                    displays usage information of the application or a command (default: false)
    -v, --version                 displays version number (default: false)
 ```
@@ -49,6 +48,8 @@ Flags:
 ```bash
 meta pre-commit
 meta semantic-release
+meta help
+meta version
 ```
 
 ## Developing
