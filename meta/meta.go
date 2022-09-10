@@ -30,7 +30,7 @@ func createConfigFile() {
 
 	defer f.Close()
 
-	words := []string{"repos:", "- repo: https://github.com/pre-commit/pre-commit-hooks", "  rev: v4.3.0", "  hooks:", "    - id: check-added-large-files", "    - id: check-merge-conflict", "    - id: check-vcs-permalinks", "    - id: end-of-file-fixer", "    - id: trailing-whitespace", "      args: [--markdown-linebreak-ext=md]", "      exclude: CHANGELOG.md", "    - id: check-yaml", "    - id: check-merge-conflict", "    - id: check-executables-have-shebangs", "    - id: check-case-conflict", "    - id: mixed-line-ending", "      args: [--fix=lf]", "    - id: detect-aws-credentials", "      args: ['--allow-missing-credentials']", "    - id: detect-private-key", "- repo: https://github.com/antonbabenko/pre-commit-terraform", "  rev: v1.74.1", "  hooks:", "    - id: terraform_fmt", "    - id: terraform_docs", "      args:", "        - --hook-config=--path-to-file=README.md", "        - --hook-config=--add-to-existing-file=true", "        - --hook-config=--create-file-if-not-exist=true"}
+	words := []string{"repos:", "- repo: https://github.com/pre-commit/pre-commit-hooks", "  rev: v4.3.0", "  hooks:", "    - id: check-added-large-files", "    - id: check-merge-conflict", "    - id: check-vcs-permalinks", "    - id: end-of-file-fixer", "    - id: trailing-whitespace", "      args: [--markdown-linebreak-ext=md]", "      exclude: CHANGELOG.md", "    - id: check-yaml", "    - id: check-merge-conflict", "    - id: check-case-conflict", "    - id: mixed-line-ending", "      args: [--fix=lf]", "    - id: detect-aws-credentials", "      args: ['--allow-missing-credentials']", "    - id: detect-private-key", "- repo: https://github.com/antonbabenko/pre-commit-terraform", "  rev: v1.64.1","  hooks:", "      - id: terraform_fmt", "      - id: terraform_docs", "        args:", "        - --hook-config=--path-to-file=README.md", "        - --hook-config=--add-to-existing-file=true", "        - --hook-config=--create-file-if-not-exist=true"}
 
 	for _, word := range words {
 
@@ -53,7 +53,7 @@ func createFIle() {
 
 	defer f.Close()
 
-	words := []string{"#!/bin/bash", "set -e", "for file in $(git status --short | grep '^[MARCD]')","do", "  git show ':$file'", "  pre-commit run --show-diff-on-failure --color=always --all-files",  "  if [ $? -ne 0 ]; then", "    exit 1", "  fi", "done"}
+	words := []string{"#!/bin/bash", " ",  "set -e", "pre-commit run --show-diff-on-failure --color=always --all-files"}
 
 	for _, word := range words {
 

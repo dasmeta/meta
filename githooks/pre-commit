@@ -1,12 +1,4 @@
 #!/bin/bash
 
 set -e
-
-for file in $(git status --short | grep '^[MARCD]')
-do
-  git show ":$file"
-  pre-commit run --show-diff-on-failure --color=always --all-files
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
-done
+pre-commit run --show-diff-on-failure --color=always --all-files
