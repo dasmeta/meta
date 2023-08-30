@@ -55,3 +55,14 @@ meta version
 ## Developing
 
 This repository contains scripts that run in linux or mac for installing pre-commit hooks. The files read from release. You must attach binaries if you add something new.
+
+## Docker
+### Check Version
+`make version`
+`docker run -it dasmeta/meta version`
+
+### Test create
+`make docker-build debug-gitlab`
+
+### Build and publish docker image
+`make docker-publish`

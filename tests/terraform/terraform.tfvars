@@ -1,0 +1,7 @@
+git_service_provider = "github|gitlab|bitbucket"
+git_org = "boilerplate-organisation"
+git_repo = "boilerplate-organisation"
+git_auth_token = "54567898656"
+aws_access_key_id = "54567898656"
+aws_secret_access_key = "54567898656"
+aws_default_region = "54567898656"

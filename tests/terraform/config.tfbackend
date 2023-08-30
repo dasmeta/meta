@@ -1,0 +1,3 @@
+organization = "boilerplate-organisation"
+workspaces { name = "null" }
+hostname     = "app.terraform.io"

@@ -1,0 +1,13 @@
+# minimal values
+git_service_provider: github|gitlab|bitbucket
+git_org: boilerplate-organisation
+git_repo: boilerplate-organisation
+git_auth_token: comes from CI variables - should be created in SCM manually
+
+terraform_cloud_org: boilerplate-organisation # can match to git_org
+terraform_cloud_token: comes from CI variables - should be created in TFC manually
+
+# setup specific values
+aws_access_key_id: # why is this needed
+aws_secret_access_key: # why is this needed
+aws_default_region: # why is this needed
